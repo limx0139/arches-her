@@ -21,6 +21,10 @@ APP_VERSION = semantic_version.Version(major=0, minor=0, patch=0)
 APP_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 MIN_ARCHES_VERSION = arches.__version__
 MAX_ARCHES_VERSION = arches.__version__
+GDAL_LIBRARY_PATH = '/opt/homebrew/Cellar/gdal/3.11.4_1/lib/libgdal.37.3.11.4.dylib'
+GEOS_LIBRARY_PATH = '/opt/homebrew/Cellar/geos/3.14.0/lib/libgeos_c.dylib'
+ELASTICSEARCH_HOSTS = [{'scheme': 'http', 'host': 'localhost', 'port': ELASTICSEARCH_HTTP_PORT}]
+HER_ROOT = os.path.join(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()) + '../../../')), 'arches-her', 'arches_her')
 
 
 WEBPACK_LOADER = {
@@ -29,6 +33,9 @@ WEBPACK_LOADER = {
     },
 }
 
+DATATYPE_LOCATIONS.append('arches_her.datatypes')
+FUNCTION_LOCATIONS.append('arches_her.functions')
+SEARCH_COMPONENT_LOCATIONS.append('arches_her.search.components')
 DATATYPE_LOCATIONS.append('my_project.datatypes')
 FUNCTION_LOCATIONS.append('my_project.functions')
 ETL_MODULE_LOCATIONS.append('my_project.etl_modules')
@@ -112,29 +119,29 @@ DATABASES = {
 SEARCH_THUMBNAILS = False
 
 INSTALLED_APPS = (
-    "webpack_loader",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "django.contrib.gis",
-    "arches",
-    "arches.app.models",
-    "arches.management",
-    "guardian",
-    "captcha",
-    "revproxy",
-    "corsheaders",
-    "oauth2_provider",
-    "django_celery_results",
-    "compressor",
-    # "silk",
-    "my_project",
+   "webpack_loader",
+   "django.contrib.admin",
+   "django.contrib.auth",
+   "django.contrib.contenttypes",
+   "django.contrib.sessions",
+   "django.contrib.messages",
+   "django.contrib.staticfiles",
+   "django.contrib.gis",
+   "arches",
+   "arches.app.models",
+   "arches.management",
+   "guardian",
+   "captcha",
+   "revproxy",
+   "corsheaders",
+   "oauth2_provider",
+   "django_celery_results",
+   "compressor",
+   "arches_her",
+   "my_project",
 )
 
-ARCHES_APPLICATIONS = ()
+ARCHES_APPLICATIONS = ("arches_her",)
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
