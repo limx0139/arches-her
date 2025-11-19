@@ -24,12 +24,12 @@ MAX_ARCHES_VERSION = arches.__version__
 GDAL_LIBRARY_PATH = '/opt/homebrew/Cellar/gdal/3.11.4_1/lib/libgdal.37.3.11.4.dylib'
 GEOS_LIBRARY_PATH = '/opt/homebrew/Cellar/geos/3.14.0/lib/libgeos_c.dylib'
 ELASTICSEARCH_HOSTS = [{'scheme': 'http', 'host': 'localhost', 'port': ELASTICSEARCH_HTTP_PORT}]
-HER_ROOT = os.path.join(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()) + '../../../')), 'arches-her', 'arches_her')
+HER_ROOT = os.path.join(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()) + '../../../../')), 'arches-her', 'arches_her')
 
 
 WEBPACK_LOADER = {
     "DEFAULT": {
-        "STATS_FILE": os.path.join(APP_ROOT, 'webpack/webpack-stats.json'),
+        "STATS_FILE": os.path.join(HER_ROOT, 'webpack/webpack-stats.json'),
     },
 }
 
