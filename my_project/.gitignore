@@ -1,0 +1,15 @@
+*.pyc
+*.log
+my_project/logs
+my_project/export_deliverables
+my_project/cantaloupe/*
+my_project/staticfiles
+my_project/media/packages
+my_project/media/node_modules
+my_project/media/build/*
+my_project/uploadedfiles/*
+my_project/settings_local.py
+my_project/webpack/webpack-stats.json
+my_project/webpack/webpack-user-config.js
+.vscode/
+CACHE

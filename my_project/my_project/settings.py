@@ -1,5 +1,5 @@
 """
-Django settings for arches_her project.
+Django settings for my_project project.
 """
 
 import json
@@ -16,15 +16,12 @@ try:
 except ImportError:
     pass
 
-APP_NAME = 'arches_her'
+APP_NAME = 'my_project'
 APP_VERSION = semantic_version.Version(major=0, minor=0, patch=0)
 APP_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-APP_PATHNAME = "arches-her"
 MIN_ARCHES_VERSION = arches.__version__
 MAX_ARCHES_VERSION = arches.__version__
-GDAL_LIBRARY_PATH = '/opt/homebrew/Cellar/gdal/3.11.4_1/lib/libgdal.37.3.11.4.dylib'
-GEOS_LIBRARY_PATH = '/opt/homebrew/Cellar/geos/3.14.0/lib/libgeos_c.dylib'
-ELASTICSEARCH_HOSTS = [{'scheme': 'http', 'host': 'localhost', 'port': ELASTICSEARCH_HTTP_PORT}]
+
 
 WEBPACK_LOADER = {
     "DEFAULT": {
@@ -32,16 +29,12 @@ WEBPACK_LOADER = {
     },
 }
 
-DATATYPE_LOCATIONS.append('arches_her.datatypes')
-FUNCTION_LOCATIONS.append('arches_her.functions')
-ETL_MODULE_LOCATIONS.append('arches_her.etl_modules')
-SEARCH_COMPONENT_LOCATIONS.append('arches_her.search.components')
+DATATYPE_LOCATIONS.append('my_project.datatypes')
+FUNCTION_LOCATIONS.append('my_project.functions')
+ETL_MODULE_LOCATIONS.append('my_project.etl_modules')
+SEARCH_COMPONENT_LOCATIONS.append('my_project.search_components')
 
 LOCALE_PATHS.append(os.path.join(APP_ROOT, 'locale'))
-
-TEMPLATES[0]["OPTIONS"]["context_processors"].append(
-    "arches_her.utils.context_processors.project_settings"
-)
 
 FILE_TYPE_CHECKING = False
 FILE_TYPES = ["bmp", "gif", "jpg", "jpeg", "pdf", "png", "psd", "rtf", "tif", "tiff", "xlsx", "csv", "zip"]
@@ -49,12 +42,12 @@ FILENAME_GENERATOR = "arches.app.utils.storage_filename_generator.generate_filen
 UPLOADED_FILES_DIR = "uploadedfiles"
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z23n6ot1_fsturw_gor66k^d#tl9h8*8*_e7qb)tyoucdo-z+x'
+SECRET_KEY = 'vyo3x1x#-1(0&p)#39l!$iq!(#3)e-%e(1pfr)iejrq@o=bx64'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ROOT_URLCONF = 'arches_her.urls'
+ROOT_URLCONF = 'my_project.urls'
 
 # Modify this line as needed for your project to connect to elasticsearch with a password that you generate
 ELASTICSEARCH_CONNECTION_OPTIONS = {"request_timeout": 30, "verify_certs": False, "basic_auth": ("elastic", "E1asticSearchforArche5")}
@@ -72,11 +65,11 @@ ELASTICSEARCH_CONNECTION_OPTIONS = {"request_timeout": 30, "verify_certs": False
 # Or Kibana: https://www.elastic.co/guide/en/kibana/current/api-keys.html
 
 # a prefix to append to all elasticsearch indexes, note: must be lower case
-ELASTICSEARCH_PREFIX = 'arches_her'
+ELASTICSEARCH_PREFIX = 'my_project'
 
 ELASTICSEARCH_CUSTOM_INDEXES = []
 # [{
-#     'module': 'arches_her.search_indexes.sample_index.SampleIndex',
+#     'module': 'my_project.search_indexes.sample_index.SampleIndex',
 #     'name': 'my_new_custom_index', <-- follow ES index naming rules
 #     'should_update_asynchronously': False  <-- denotes if asynchronously updating the index would affect custom functionality within the project.
 # }]
@@ -100,7 +93,7 @@ DATABASES = {
         "CONN_MAX_AGE": 0,
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "HOST": "localhost",
-        "NAME": "arches_her",
+        "NAME": "my_project",
         "OPTIONS": {},
         "PASSWORD": "postgis",
         "PORT": "5432",
@@ -116,17 +109,7 @@ DATABASES = {
     }
 }
 
-# The maximum number of instances a user can download from search export without celery
-SEARCH_EXPORT_IMMEDIATE_DOWNLOAD_THRESHOLD = 2000
-
-# The maximum number of instances a user can download using HTML format from search export without celery
-SEARCH_EXPORT_IMMEDIATE_DOWNLOAD_THRESHOLD_HTML_FORMAT = 10
-
-# The maximum documents ElasticSearch will return in an export - **System Settings**
-SEARCH_EXPORT_LIMIT = 15000
-
 SEARCH_THUMBNAILS = False
-
 
 INSTALLED_APPS = (
     "webpack_loader",
@@ -148,7 +131,7 @@ INSTALLED_APPS = (
     "django_celery_results",
     "compressor",
     # "silk",
-    "arches_her",
+    "my_project",
 )
 
 ARCHES_APPLICATIONS = ()
@@ -186,7 +169,7 @@ TEMPLATES = build_templates_config(
 ALLOWED_HOSTS = []
 
 SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(APP_ROOT, 'system_settings', 'System_Settings.json')
-WSGI_APPLICATION = 'arches_her.wsgi.application'
+WSGI_APPLICATION = 'my_project.wsgi.application'
 
 # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
 # It must end in a slash if set to a non-empty value.
@@ -250,7 +233,7 @@ RATE_LIMIT = "5/m"
 DATA_UPLOAD_MAX_MEMORY_SIZE = 15728640
 
 # Unique session cookie ensures that logins are treated separately for each app
-SESSION_COOKIE_NAME = f"{APP_NAME}_{APP_VERSION}"
+SESSION_COOKIE_NAME = 'my_project'
 
 # For more info on configuring your cache: https://docs.djangoproject.com/en/2.2/topics/cache/
 CACHES = {
@@ -275,25 +258,6 @@ DATE_IMPORT_EXPORT_FORMAT = "%Y-%m-%d" # Custom date format for dates imported f
 # ordered as seen in the resource cards or not.
 EXPORT_DATA_FIELDS_IN_CARD_ORDER = False
 
-
-# British National Grid (BNG) and Latitude/Longitude set as preferred coordinate systems.  To revert to 
-# Geographic as the preferred coordinate system, comment out the preferred coordinate system setting below
-
-PREFERRED_COORDINATE_SYSTEMS = (
-    {
-        "name": "BNG",
-        "srid": "27700",
-        "proj4": "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs",
-        "default": True,
-    },
-    {"name": "LatLong", "srid": "4326", "proj4": "+proj=longlat +datum=WGS84 +no_defs", "default": False},  # Required
-)
-ANALYSIS_COORDINATE_SYSTEM_SRID=27700 # Comment out if using LatLong/WGS84
-
-# Europe/London set as the default time zone.  To revert to "America/Chicago," comment out the time zone setting below
-
-TIME_ZONE = "Europe/London"
-
 #Identify the usernames and duration (seconds) for which you want to cache the time wheel
 CACHE_BY_USER = {
     "default": 3600 * 24, #24hrs
@@ -306,9 +270,9 @@ GRAPH_MODEL_CACHE_TIMEOUT = None
 
 OAUTH_CLIENT_ID = ''  #'9JCibwrWQ4hwuGn5fu2u1oRZSs9V6gK8Vu8hpRC4'
 
-APP_TITLE = 'Arches for Historic Environment Records'
+APP_TITLE = 'Arches | Heritage Data Management'
 COPYRIGHT_TEXT = 'All Rights Reserved.'
-COPYRIGHT_YEAR = '2024'
+COPYRIGHT_YEAR = '2019'
 
 ENABLE_CAPTCHA = False
 # RECAPTCHA_PUBLIC_KEY = ''
@@ -329,7 +293,7 @@ EMAIL_HOST_USER = "xxxx@xxx.com"
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-CELERY_BROKER_URL = "amqp://guest:guest@localhost" # RabbitMQ --> "amqp://guest:guest@localhost",  Redis --> "redis://localhost:6379/0"
+CELERY_BROKER_URL = "" # RabbitMQ --> "amqp://guest:guest@localhost",  Redis --> "redis://localhost:6379/0"
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_RESULT_BACKEND = 'django-db' # Use 'django-cache' if you want to use your cache as your backend
 CELERY_TASK_SERIALIZER = 'json'
@@ -339,15 +303,8 @@ CELERY_SEARCH_EXPORT_EXPIRES = 24 * 3600  # seconds
 CELERY_SEARCH_EXPORT_CHECK = 3600  # seconds
 
 CELERY_BEAT_SCHEDULE = {
-    "delete-expired-search-export": {
-        "task": "arches.app.tasks.delete_file",
-        "schedule": CELERY_SEARCH_EXPORT_CHECK,
-    },
-    "notification": {
-        "task": "arches.app.tasks.message",
-        "schedule": CELERY_SEARCH_EXPORT_CHECK,
-        "args": ("Celery Beat is Running",),
-    },
+    "delete-expired-search-export": {"task": "arches.app.tasks.delete_file", "schedule": CELERY_SEARCH_EXPORT_CHECK,},
+    "notification": {"task": "arches.app.tasks.message", "schedule": CELERY_SEARCH_EXPORT_CHECK, "args": ("Celery Beat is Running",),},
 }
 
 # Set to True if you want to send celery tasks to the broker without being able to detect celery.
@@ -453,14 +410,6 @@ except ImportError as e:
     except ImportError as e:
         pass
 
-DOCKER = False
-
-if DOCKER:
-    try:
-        from .settings_docker import *
-    except ImportError:
-        pass
-
 # returns an output that can be read by NODEJS
 if __name__ == "__main__":
     transmit_webpack_django_config(
@@ -471,3 +420,4 @@ if __name__ == "__main__":
         static_url=STATIC_URL,
         webpack_development_server_port=WEBPACK_DEVELOPMENT_SERVER_PORT,
     )
+
